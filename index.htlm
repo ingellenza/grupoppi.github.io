@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo PIP | Construcción y Soluciones</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">GRUPO PIP</div>
+        <ul class="menu">
+            <li><a href="#">Inicio</a></li>
+            <li class="dropdown">
+                Productos <i class="fa fa-chevron-down"></i>
+                <ul class="submenu">
+                    <li><a href="#" onclick="filtrar('CEMENTOS')">Cementos</a></li>
+                    <li><a href="#" onclick="filtrar('HERRAMIENTAS')">Herramientas</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="cart-icon" onclick="toggleCart()">
+            <i class="fa fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </nav>
+
+    <section class="container">
+        <div id="product-grid" class="grid">
+            </div>
+    </section>
+
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="">
+                <div class="modal-info">
+                    <h2 id="modal-title"></h2>
+                    <p id="modal-desc"></p>
+                    <h3 id="modal-price"></h3>
+                    <input type="number" id="modal-qty" value="1" min="1">
+                    <button id="btn-add-modal">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <aside id="cart-sidebar" class="sidebar">
+        <h2>Tu Carrito</h2>
+        <div id="cart-items"></div>
+        <div class="cart-footer">
+            <h3>Total: $<span id="cart-total">0</span></h3>
+            <button onclick="procesarPago()">FINALIZAR COMPRA</button>
+        </div>
+    </aside>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

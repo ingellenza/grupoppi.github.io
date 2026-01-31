@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Grupo PIP</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .admin-form { max-width: 500px; margin: 20px auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: var(--shadow); }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <div class="admin-form">
+        <h2>Cargar Nuevo Producto</h2>
+        <input type="text" id="nombre" placeholder="Nombre del producto (ej: Cemento Holcim)">
+        <input type="number" id="precio" placeholder="Precio (solo números)">
+        <input type="number" id="stock" placeholder="Stock disponible">
+        <input type="text" id="imagen" placeholder="URL de la imagen (ej: img/cemento.jpg)">
+        <textarea id="descripcion" placeholder="Descripción del producto"></textarea>
+        <button onclick="guardarProducto()">Subir a la Base de Datos</button>
+        <p id="status"></p>
+    </div>
+
+    <script>
+        async function guardarProducto() {
+            const status = document.getElementById('status');
+            const producto = {
+                nombre: document.getElementById('nombre').value,
+                precio: document.getElementById('precio').value,
+                stock: document.getElementById('stock').value,
+                imagen: document.getElementById('imagen').value,
+                descripcion: document.getElementById('descripcion').value
+            };
+
+            status.innerText = "Subiendo...";
+
+            try {
+                // REEMPLAZA ESTA URL con la que te dé RENDER
+                const response = await fetch('https://grupopip-backend.onrender.com/productos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(producto)
+                });
+
+                if (response.ok) {
+                    status.innerText = "✅ Producto cargado con éxito";
+                    document.querySelectorAll('input, textarea').forEach(i => i.value = '');
+                }
+            } catch (err) {
+                status.innerText = "❌ Error al conectar con el servidor";
+            }
+        }
+    </script>
+</body>
+</html>
