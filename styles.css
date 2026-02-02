@@ -1,0 +1,464 @@
+/* CSS Variables based on Pampa Direct Palette */
+:root {
+    --primary-color: #E3001B; /* Amaranth Red - Like Pampa Direct Logo/Accents */
+    --secondary-color: #0033A0; /* Royal Blue */
+    --accent-color: #005A2B; /* Kaitoke Green (likely used in Yerba Mate branding) */
+    --text-color: #333333;
+    --light-bg: #f8f9fa;
+    --white: #ffffff;
+    --border-color: #e1e1e1;
+    --footer-bg: #222;
+    --font-main: 'Roboto', sans-serif;
+    --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-color);
+    background-color: var(--white);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4 {
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background-color: #c00017;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* Top Bar */
+.top-bar {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    text-align: center;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Header */
+.main-header {
+    background-color: var(--white);
+    padding: 20px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    color: var(--primary-color);
+    font-size: 28px;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.search-bar {
+    flex: 1;
+    margin: 0 40px;
+    display: flex;
+    position: relative;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    outline: none;
+}
+
+.search-bar button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.user-actions a {
+    margin-left: 20px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.user-actions i {
+    color: var(--primary-color);
+    margin-right: 5px;
+}
+
+/* Navigation */
+.main-nav {
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.main-nav ul {
+    display: flex;
+    justify-content: center;
+}
+
+.main-nav a {
+    display: block;
+    padding: 15px 20px;
+    color: #555;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.main-nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1545622966-26b69e5d4400?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /* Placeholder image of South America or products */
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.hero h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.hero .btn-primary {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+/* Product Section */
+main {
+    padding: 40px 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h3 {
+    font-size: 1.8rem;
+    color: var(--text-color);
+}
+
+.section-header hr {
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border: none;
+    margin: 10px auto 0;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* Product Card Styling */
+.product-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color);
+}
+
+.product-image {
+    width: 100%;
+    height: 250px;
+    object-fit: contain; /* Pampa direct style often shows full packaging */
+    padding: 20px;
+    background-color: var(--white);
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.product-info {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.add-to-cart {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--white);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.add-to-cart:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Cart Sidebar */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100%;
+    background: var(--white);
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    z-index: 1000;
+    transition: 0.4s;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.open {
+    right: 0;
+}
+
+.cart-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--light-bg);
+}
+
+.cart-items {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.cart-item-info {
+    flex-grow: 1;
+}
+
+.cart-item-title {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.remove-item {
+    color: #999;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.remove-item:hover {
+    color: var(--primary-color);
+}
+
+.cart-footer {
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--light-bg);
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 900;
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* Footer */
+footer {
+    background-color: var(--footer-bg);
+    color: #ccc;
+    padding-top: 60px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 40px;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+    padding-right: 20px;
+}
+
+.footer-col h4 {
+    color: var(--white);
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a:hover {
+    color: var(--primary-color);
+}
+
+.bottom-bar {
+    background-color: #111;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.8rem;
+}
+
+/* Loading */
+.loading-spinner {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 40px;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+    }
+    
+    .search-bar {
+        margin: 20px 0;
+        width: 100%;
+    }
+    
+    .main-nav ul {
+        flex-wrap: wrap;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+}

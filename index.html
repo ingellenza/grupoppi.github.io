@@ -3,59 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grupo PIP | Construcción y Soluciones</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Grupo PPI | Productos de Argentina y Uruguay</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">GRUPO PIP</div>
-        <ul class="menu">
-            <li><a href="#">Inicio</a></li>
-            <li class="dropdown">
-                Productos <i class="fa fa-chevron-down"></i>
-                <ul class="submenu">
-                    <li><a href="#" onclick="filtrar('CEMENTOS')">Cementos</a></li>
-                    <li><a href="#" onclick="filtrar('HERRAMIENTAS')">Herramientas</a></li>
-                </ul>
-            </li>
-        </ul>
-        <div class="cart-icon" onclick="toggleCart()">
-            <i class="fa fa-shopping-cart"></i>
-            <span id="cart-count">0</span>
-        </div>
-    </nav>
 
-    <section class="container">
-        <div id="product-grid" class="grid">
-            </div>
-    </section>
-
-    <div id="product-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <div class="modal-body">
-                <img id="modal-img" src="" alt="">
-                <div class="modal-info">
-                    <h2 id="modal-title"></h2>
-                    <p id="modal-desc"></p>
-                    <h3 id="modal-price"></h3>
-                    <input type="number" id="modal-qty" value="1" min="1">
-                    <button id="btn-add-modal">Agregar al Carrito</button>
-                </div>
-            </div>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <p>Envíos internacionales a todo el mundo ✈️</p>
         </div>
     </div>
 
-    <aside id="cart-sidebar" class="sidebar">
-        <h2>Tu Carrito</h2>
-        <div id="cart-items"></div>
-        <div class="cart-footer">
-            <h3>Total: $<span id="cart-total">0</span></h3>
-            <button onclick="procesarPago()">FINALIZAR COMPRA</button>
-        </div>
-    </aside>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">
+                <a href="#"><h1>Grupo PPI</h1></a>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar productos...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
 
-    <script src="js/main.js"></script>
+            <div class="user-actions">
+                <a href="#" class="account"><i class="fas fa-user"></i> Mi Cuenta</a>
+                <a href="#" class="cart" id="cart-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Yerba Mate</a></li>
+                <li><a href="#">Dulce de Leche</a></li>
+                <li><a href="#">Alfajores</a></li>
+                <li><a href="#">Despensa</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Los mejores productos del Sur</h2>
+            <p>Directo a tu puerta, estés donde estés.</p>
+            <a href="#products" class="btn-primary">Ver Ofertas</a>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <main class="container" id="products">
+        <div class="section-header">
+            <h3>Productos Destacados / Featured Products</h3>
+            <hr>
+        </div>
+        
+        <div id="product-list" class="product-grid">
+            <!-- Products will be loaded here via JS -->
+            <div class="loading-spinner">Cargando productos...</div>
+        </div>
+    </main>
+
+    <!-- Cart Sidebar (Hidden by default) -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button id="close-cart"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items here -->
+            <p class="empty-cart-msg">Tu carrito está vacío</p>
+        </div>
+        <div class="cart-footer">
+            <div class="total">
+                <span>Total:</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button id="checkout-btn" class="btn-primary btn-block">Finalizar Compra</button>
+        </div>
+    </div>
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4>Sobre Nosotros</h4>
+                <p>Llevamos los sabores de casa a cualquier parte del mundo. Calidad garantizada.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Ayuda</h4>
+                <ul>
+                    <li><a href="#">Envíos</a></li>
+                    <li><a href="#">Devoluciones</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p>Email: info@grupoppi.com</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-bar">
+            <p>&copy; 2024 Grupo PPI E-commerce. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>
