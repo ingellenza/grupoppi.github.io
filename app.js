@@ -21,7 +21,49 @@ const API_URL = 'https://grupoppi-backend.onrender.com/api';
 document.addEventListener('DOMContentLoaded', () => {
     fetchProducts();
     updateCartUI();
+    initSlider(); // Initialize Slider
 });
+
+// Slider Logic
+function initSlider() {
+    const slides = document.querySelectorAll('.slide');
+    const nextBtn = document.querySelector('.next-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    const indicators = document.querySelectorAll('.indicator');
+    let currentSlide = 0;
+    const slideInterval = 5000; // 5 seconds
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        indicators.forEach(ind => ind.classList.remove('active'));
+
+        if (index >= slides.length) currentSlide = 0;
+        else if (index < 0) currentSlide = slides.length - 1;
+        else currentSlide = index;
+
+        slides[currentSlide].classList.add('active');
+        indicators[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+    // Event Listeners
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+    indicators.forEach((ind, index) => {
+        ind.addEventListener('click', () => showSlide(index));
+    });
+
+    // Auto Play
+    setInterval(nextSlide, slideInterval);
+}
 
 // Fetch Products from Backend
 async function fetchProducts() {

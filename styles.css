@@ -1,16 +1,19 @@
 /* CSS Variables based on Pampa Direct Palette */
 :root {
-    --primary-color: #E3001B; /* Amaranth Red - Like Pampa Direct Logo/Accents */
-    --secondary-color: #0033A0; /* Royal Blue */
-    --accent-color: #005A2B; /* Kaitoke Green (likely used in Yerba Mate branding) */
+    --primary-color: #E3001B;
+    /* Amaranth Red - Like Pampa Direct Logo/Accents */
+    --secondary-color: #0033A0;
+    /* Royal Blue */
+    --accent-color: #005A2B;
+    /* Kaitoke Green (likely used in Yerba Mate branding) */
     --text-color: #333333;
     --light-bg: #f8f9fa;
     --white: #ffffff;
     --border-color: #e1e1e1;
     --footer-bg: #222;
     --font-main: 'Roboto', sans-serif;
-    --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 10px rgba(0,0,0,0.1);
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Global Reset */
@@ -44,7 +47,10 @@ ul {
 }
 
 /* Typography Helpers */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
     font-weight: 700;
     margin-bottom: 15px;
 }
@@ -84,7 +90,7 @@ h1, h2, h3, h4 {
 .main-header {
     background-color: var(--white);
     padding: 20px 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -166,9 +172,80 @@ h1, h2, h3, h4 {
     color: var(--primary-color);
 }
 
+/* Dropdown Menu Styles */
+.nav-list {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown>a i {
+    font-size: 0.8rem;
+    margin-left: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--white);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    top: 100%;
+    left: 0;
+    border-top: 3px solid var(--primary-color);
+    border-radius: 0 0 4px 4px;
+}
+
+.dropdown-content a {
+    color: var(--text-color);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #f0f0f0;
+    text-transform: capitalize;
+    /* Cleaner look */
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background-color: #f9f9f9;
+    color: var(--primary-color);
+    padding-left: 20px;
+    /* Slight movement effect */
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1545622966-26b69e5d4400?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); /* Placeholder image of South America or products */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1545622966-26b69e5d4400?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    /* Placeholder image of South America or products */
     background-size: cover;
     background-position: center;
     color: var(--white);
@@ -179,19 +256,154 @@ h1, h2, h3, h4 {
 .hero h2 {
     font-size: 3rem;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 30px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .hero .btn-primary {
     padding: 12px 30px;
     font-size: 1.1rem;
     text-transform: uppercase;
+}
+
+/* Slider Section */
+.slider-container {
+    position: relative;
+    height: 500px;
+    width: 100%;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.slider {
+    position: relative;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    /* Flex to center content */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 1;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+.slide-content h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    animation: fadeInUp 1s ease both;
+}
+
+.slide-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    animation: fadeInUp 1s ease both 0.3s;
+    /* Delay */
+}
+
+.slide-content .btn-primary {
+    animation: fadeInUp 1s ease both 0.6s;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slider Controls */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 15px;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+}
+
+.slider-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.prev-btn {
+    left: 0;
+}
+
+.next-btn {
+    right: 0;
+}
+
+.slider-indicators {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.indicator.active {
+    background-color: var(--white);
+    transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+    .slider-container {
+        height: 350px;
+    }
+
+    .slide-content h2 {
+        font-size: 2rem;
+    }
 }
 
 /* Product Section */
@@ -244,7 +456,8 @@ main {
 .product-image {
     width: 100%;
     height: 250px;
-    object-fit: contain; /* Pampa direct style often shows full packaging */
+    object-fit: contain;
+    /* Pampa direct style often shows full packaging */
     padding: 20px;
     background-color: var(--white);
     border-bottom: 1px solid #f0f0f0;
@@ -298,7 +511,7 @@ main {
     width: 350px;
     height: 100%;
     background: var(--white);
-    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     transition: 0.4s;
     display: flex;
@@ -382,7 +595,7 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     z-index: 900;
     display: none;
 }
@@ -448,16 +661,16 @@ footer {
     .header-content {
         flex-direction: column;
     }
-    
+
     .search-bar {
         margin: 20px 0;
         width: 100%;
     }
-    
+
     .main-nav ul {
         flex-wrap: wrap;
     }
-    
+
     .hero h2 {
         font-size: 2rem;
     }

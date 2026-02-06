@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
 
     <!-- Top Bar -->
@@ -22,9 +24,11 @@
     <header class="main-header">
         <div class="container header-content">
             <div class="logo">
-                <a href="#"><h1>Grupo PPI</h1></a>
+                <a href="#">
+                    <h1>Grupo PPI</h1>
+                </a>
             </div>
-            
+
             <div class="search-bar">
                 <input type="text" placeholder="Buscar productos...">
                 <button><i class="fas fa-search"></i></button>
@@ -43,23 +47,75 @@
     <!-- Navigation -->
     <nav class="main-nav">
         <div class="container">
-            <ul>
+            <ul class="nav-list">
                 <li><a href="#">Inicio</a></li>
-                <li><a href="#">Yerba Mate</a></li>
-                <li><a href="#">Dulce de Leche</a></li>
-                <li><a href="#">Alfajores</a></li>
-                <li><a href="#">Despensa</a></li>
+                <li class="dropdown">
+                    <a href="#">Categorías <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Yerba Mate</a>
+                        <a href="#">Dulce de Leche</a>
+                        <a href="#">Alfajores</a>
+                        <a href="#">Despensa</a>
+                        <a href="#">Vinos</a>
+                        <a href="#">Artesanías</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Marcas <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Havanna</a>
+                        <a href="#">Taragüi</a>
+                        <a href="#">Playadito</a>
+                        <a href="#">Arcor</a>
+                    </div>
+                </li>
+                <li><a href="#">Ofertas</a></li>
                 <li><a href="#">Contacto</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h2>Los mejores productos del Sur</h2>
-            <p>Directo a tu puerta, estés donde estés.</p>
-            <a href="#products" class="btn-primary">Ver Ofertas</a>
+    <!-- Hero Slider Section -->
+    <section class="slider-container">
+        <div class="slider">
+            <!-- Slide 1 -->
+            <div class="slide active"
+                style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1545622966-26b69e5d4400?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                <div class="container slide-content">
+                    <h2>Los mejores productos del Sur</h2>
+                    <p>Yerba Mate, Dulce de Leche y más, directo a tu casa.</p>
+                    <a href="#products" class="btn-primary">Ver Catálogo</a>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="slide"
+                style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Dulce_de_Leche_2017.jpg/1200px-Dulce_de_Leche_2017.jpg');">
+                <div class="container slide-content">
+                    <h2>Dulzura Cremososa</h2>
+                    <p>La mayor variedad de Dulce de Leche para tus postres.</p>
+                    <a href="#products" class="btn-primary">Comprar Ahora</a>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="slide"
+                style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.squarespace-cdn.com/content/v1/5e42d765507b993305cd03d3/1587588373183-1L9K8Q9Q0Q4Q8Q6Q9Q8Q/yerba-mate-gourd-bombilla.jpg');">
+                <div class="container slide-content">
+                    <h2>Momento del Mate</h2>
+                    <p>Todo lo que necesitas para tu ritual diario.</p>
+                    <a href="#products" class="btn-primary">Ver Yerbas</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+        <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+
+        <!-- Indicators -->
+        <div class="slider-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
         </div>
     </section>
 
@@ -69,7 +125,7 @@
             <h3>Productos Destacados / Featured Products</h3>
             <hr>
         </div>
-        
+
         <div id="product-list" class="product-grid">
             <!-- Products will be loaded here via JS -->
             <div class="loading-spinner">Cargando productos...</div>
@@ -127,4 +183,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>
