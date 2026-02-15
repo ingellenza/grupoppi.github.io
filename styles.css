@@ -1,7 +1,7 @@
 /* CSS Variables based on Pampa Direct Palette */
 :root {
-    --primary-color: #E3001B;
-    /* Amaranth Red - Like Pampa Direct Logo/Accents */
+    --primary-color: #0033A0;
+    /* Strong Blue (Royal Blue) */
     --secondary-color: #0033A0;
     /* Royal Blue */
     --accent-color: #005A2B;
@@ -254,6 +254,7 @@ h4 {
     margin-left: 0;
     border-radius: 4px;
     display: none;
+    min-width: 180px;
 }
 
 .dropdown-submenu:hover>.dropdown-content {
@@ -265,10 +266,21 @@ h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-right: 20px;
+}
+
+.dropdown-submenu>a:after {
+    content: '\f054';
+    /* FontAwesome Chevron Right */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 0.8em;
+    position: absolute;
+    right: 10px;
 }
 
 .dropdown-submenu>a i {
-    font-size: 0.7rem;
+    display: none;
 }
 
 /* Hero Section */
