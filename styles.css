@@ -242,6 +242,35 @@ h4 {
     }
 }
 
+/* Nested Dropdown Styles */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-content {
+    top: 0;
+    left: 100%;
+    margin-top: -5px;
+    margin-left: 0;
+    border-radius: 4px;
+    display: none;
+}
+
+.dropdown-submenu:hover>.dropdown-content {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.dropdown-submenu>a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-submenu>a i {
+    font-size: 0.7rem;
+}
+
 /* Hero Section */
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1545622966-26b69e5d4400?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');

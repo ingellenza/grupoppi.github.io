@@ -113,6 +113,7 @@ async function fetchProducts() {
         }
 
         renderProducts(products);
+        renderCategories(products);
     } catch (error) {
         productList.innerHTML = '<p class="error">Error al cargar productos. Por favor intenta más tarde.</p>';
         console.error('Error fetching products:', error);
@@ -130,7 +131,7 @@ function renderProducts(productsToRender) {
         const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price);
 
         productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <img src="${product.image ? (product.image.startsWith('http') ? product.image : API_URL.replace('/api', '') + product.image) : 'https://via.placeholder.com/300x200?text=Sin+Imagen'}" alt="${product.name}" class="product-image">
             <div class="product-info">
                 <h4 class="product-title">${product.name}</h4>
                 <p class="product-description">${product.description || ''}</p>
@@ -149,6 +150,84 @@ function renderProducts(productsToRender) {
             const id = e.target.closest('button').dataset.id;
             addToCart(id);
         });
+    });
+}
+
+// Render Categories to Menu
+function renderCategories(products) {
+    const categoryMenu = document.getElementById('category-menu');
+    if (!categoryMenu) return;
+
+    // Group by Category -> Subcategories
+    const categoryMap = {};
+
+    products.forEach(p => {
+        if (!p.category) return;
+        if (!categoryMap[p.category]) {
+            categoryMap[p.category] = new Set();
+        }
+        if (p.subcategory) {
+            categoryMap[p.category].add(p.subcategory);
+        }
+    });
+
+    categoryMenu.innerHTML = '';
+
+    // Sort categories alphabetically
+    const sortedCategories = Object.keys(categoryMap).sort();
+
+    sortedCategories.forEach(cat => {
+        const subcats = Array.from(categoryMap[cat]).sort();
+
+        if (subcats.length > 0) {
+            // Render as Submenu
+            const submenuContainer = document.createElement('div');
+            submenuContainer.classList.add('dropdown-submenu');
+
+            const catLink = document.createElement('a');
+            catLink.href = '#';
+            catLink.innerHTML = `${cat} <i class="fas fa-chevron-right"></i>`;
+
+            // Clicking Category shows all products in that category
+            catLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent closing immediately if handled elsewhere
+                const filtered = products.filter(p => p.category === cat);
+                renderProducts(filtered);
+            });
+
+            const subMenuDiv = document.createElement('div');
+            subMenuDiv.classList.add('dropdown-content');
+
+            subcats.forEach(sub => {
+                const subLink = document.createElement('a');
+                subLink.href = '#';
+                subLink.innerText = sub;
+                subLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const filtered = products.filter(p => p.category === cat && p.subcategory === sub);
+                    renderProducts(filtered);
+                });
+                subMenuDiv.appendChild(subLink);
+            });
+
+            submenuContainer.appendChild(catLink);
+            submenuContainer.appendChild(subMenuDiv);
+            categoryMenu.appendChild(submenuContainer);
+
+        } else {
+            // Render as Simple Link
+            const link = document.createElement('a');
+            link.href = `#`;
+            link.innerText = cat;
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const filtered = products.filter(p => p.category === cat);
+                renderProducts(filtered);
+            });
+            categoryMenu.appendChild(link);
+        }
     });
 }
 
