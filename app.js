@@ -24,6 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
     initSlider(); // Initialize Slider
 });
 
+// Helper: Scroll with offset for sticky header
+function scrollToSection(elementId) {
+    const element = document.getElementById(elementId) || document.querySelector(elementId);
+    if (!element) return;
+
+    const headerOffset = 120; // Adjust this value to center images better (Header height + padding)
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+    });
+}
+
 // Slider Logic
 function initSlider() {
     const slides = document.querySelectorAll('.slide');
@@ -194,8 +209,7 @@ function renderCategories(products) {
                 e.stopPropagation(); // Prevent closing immediately if handled elsewhere
                 const filtered = products.filter(p => p.category === cat);
                 renderProducts(filtered);
-                const productSection = document.getElementById('product-list') || document.querySelector('.product-grid');
-                if (productSection) productSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                scrollToSection('#product-list');
             });
 
             const subMenuDiv = document.createElement('div');
@@ -210,9 +224,7 @@ function renderCategories(products) {
                     e.stopPropagation();
                     const filtered = products.filter(p => p.category === cat && p.subcategory === sub);
                     renderProducts(filtered);
-                    // Add smooth scroll to product list
-                    const productSection = document.getElementById('product-list') || document.querySelector('.product-grid');
-                    if (productSection) productSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    scrollToSection('#product-list');
                 });
                 subMenuDiv.appendChild(subLink);
             });
@@ -230,8 +242,7 @@ function renderCategories(products) {
                 e.preventDefault();
                 const filtered = products.filter(p => p.category === cat);
                 renderProducts(filtered);
-                const productSection = document.getElementById('product-list') || document.querySelector('.product-grid');
-                if (productSection) productSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                scrollToSection('#product-list');
             });
             categoryMenu.appendChild(link);
         }
