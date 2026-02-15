@@ -36,7 +36,7 @@
 
             try {
                 // REEMPLAZA ESTA URL con la que te dé RENDER
-                const response = await fetch('https://grupopip-backend.onrender.com/productos', {
+                const response = await fetch('http://localhost:5000/api/productos', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(producto)

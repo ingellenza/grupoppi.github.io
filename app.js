@@ -15,7 +15,7 @@ let products = [];
 
 // API Configuration
 // NOTE: When deploying, this URL will change to the Render backend URL
-const API_URL = 'https://grupoppi-backend.onrender.com/api';
+const API_URL = 'http://localhost:5000/api';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -133,6 +133,7 @@ function renderProducts(productsToRender) {
             <img src="${product.image}" alt="${product.name}" class="product-image">
             <div class="product-info">
                 <h4 class="product-title">${product.name}</h4>
+                <p class="product-description">${product.description || ''}</p>
                 <p class="product-price">${formattedPrice}</p>
                 <button class="add-to-cart" data-id="${product._id}">
                     <i class="fas fa-shopping-cart"></i> Agregar al Carrito
