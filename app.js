@@ -15,7 +15,7 @@ let products = [];
 
 // API Configuration
 // NOTE: When deploying, this URL will change to the Render backend URL
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://grupoppi-backend.onrender.com/api';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
