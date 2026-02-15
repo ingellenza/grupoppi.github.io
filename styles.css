@@ -225,7 +225,7 @@ h4 {
     /* Slight movement effect */
 }
 
-.dropdown:hover .dropdown-content {
+.dropdown:hover>.dropdown-content {
     display: block;
     animation: fadeIn 0.3s ease;
 }
@@ -257,9 +257,15 @@ h4 {
     min-width: 180px;
 }
 
+/* Show on hover */
 .dropdown-submenu:hover>.dropdown-content {
     display: block;
     animation: fadeIn 0.3s ease;
+}
+
+/* Ensure main dropdown also works on hover if not already */
+.dropdown:hover>.dropdown-content {
+    display: block;
 }
 
 .dropdown-submenu>a {
