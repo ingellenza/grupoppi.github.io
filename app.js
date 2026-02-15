@@ -194,6 +194,8 @@ function renderCategories(products) {
                 e.stopPropagation(); // Prevent closing immediately if handled elsewhere
                 const filtered = products.filter(p => p.category === cat);
                 renderProducts(filtered);
+                const productSection = document.getElementById('product-list') || document.querySelector('.product-grid');
+                if (productSection) productSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
 
             const subMenuDiv = document.createElement('div');
@@ -208,6 +210,9 @@ function renderCategories(products) {
                     e.stopPropagation();
                     const filtered = products.filter(p => p.category === cat && p.subcategory === sub);
                     renderProducts(filtered);
+                    // Add smooth scroll to product list
+                    const productSection = document.getElementById('product-list') || document.querySelector('.product-grid');
+                    if (productSection) productSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 });
                 subMenuDiv.appendChild(subLink);
             });
@@ -225,6 +230,8 @@ function renderCategories(products) {
                 e.preventDefault();
                 const filtered = products.filter(p => p.category === cat);
                 renderProducts(filtered);
+                const productSection = document.getElementById('product-list') || document.querySelector('.product-grid');
+                if (productSection) productSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
             categoryMenu.appendChild(link);
         }
