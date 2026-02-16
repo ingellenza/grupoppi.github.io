@@ -71,36 +71,34 @@
                 <div class="container slide-content">
                     <h2>Acopio de Materiales</h2>
                     <p>Todo lo que necesitás para empezar tu obra: Ladrillos, Cemento, Arena y más.</p>
-                    <a href="#products" class="btn-primary" onclick="scrollToSection('#product-list')">Ver
-                        Materiales</a>
+                    <button class="btn-primary" onclick="filterAndScroll('Obra Gruesa')">Ver Materiales</button>
                 </div>
             </div>
-            <!-- Slide 2: Hierros / Losa (Imagen anterior de Slide 3) -->
+            <!-- Slide 2: Hierros / Losa (Armado de Hierro para Hormigón) -->
             <div class="slide"
                 style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/banner-hierros.webp');">
                 <div class="container slide-content">
                     <h2>Hierros y Perfiles</h2>
                     <p>La mejor estructura para tu proyecto. Calidad garantizada en acero.</p>
-                    <a href="#products" class="btn-primary" onclick="scrollToSection('#product-list')">Ver Hierros</a>
+                    <button class="btn-primary" onclick="filterAndScroll('Hierros')">Ver Hierros</button>
                 </div>
             </div>
-            <!-- Slide 3: Construcción en Seco / Durlock (Nueva imagen específica) -->
+            <!-- Slide 3: Construcción en Seco / Durlock (Obra Interna) -->
             <div class="slide"
                 style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/banner-durlock.jpg');">
                 <div class="container slide-content">
                     <h2>Construcción en Seco</h2>
                     <p>Placas, perfiles y masillas para terminaciones perfectas y rápidas.</p>
-                    <a href="#products" class="btn-primary" onclick="scrollToSection('#product-list')">Ver Drywall</a>
+                    <button class="btn-primary" onclick="filterAndScroll('Durlock')">Ver Placas de Yeso</button>
                 </div>
             </div>
-            <!-- Slide 4: Logística / Envíos (Nueva imagen camión) -->
+            <!-- Slide 4: Logística / Envíos -->
             <div class="slide"
                 style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('images/banner-logistica.jpg');">
                 <div class="container slide-content">
                     <h2>Envíos a Obra</h2>
                     <p>Logística propia para que tus materiales lleguen a tiempo, donde los necesites.</p>
-                    <a href="#products" class="btn-primary" onclick="scrollToSection('#product-list')">Coordinar
-                        Envío</a>
+                    <button class="btn-primary" onclick="openContactModal()">Coordinar Envío</button>
                 </div>
             </div>
         </div>
@@ -150,6 +148,32 @@
         </div>
     </div>
     <div id="overlay" class="overlay"></div>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeContactModal()">&times;</span>
+            <h3 style="margin-bottom: 20px;">Coordinar Envío</h3>
+            <p style="color: #666; margin-bottom: 20px;">Contactanos para coordinar la logística de tu obra.</p>
+
+            <div class="contact-options">
+                <a href="https://wa.me/5491100000000?text=Hola%20Grupo%20PPI,%20quisiera%20coordinar%20un%20env%C3%ADo"
+                    target="_blank" class="contact-button contact-btn-whatsapp">
+                    <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i>
+                    Chat por WhatsApp
+                </a>
+
+                <a href="mailto:envios@grupoppi.com" class="contact-button contact-btn-email">
+                    <i class="fas fa-envelope"></i>
+                    envios@grupoppi.com
+                </a>
+            </div>
+
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #888;">
+                <i class="fas fa-phone-alt"></i> +54 9 11 0000-0000
+            </p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
