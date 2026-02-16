@@ -351,38 +351,79 @@ closeCartBtn.addEventListener('click', closeCart);
 overlay.addEventListener('click', closeCart);
 
 // Checkout Logic (Mercado Pago Integration)
-checkoutBtn.addEventListener('click', async () => {
-    if (cart.length === 0) return alert('El carrito está vacío');
+// Checkout Logic (Open Modal)
+const checkoutModal = document.getElementById('checkout-modal');
 
-    checkoutBtn.innerText = 'Procesando...';
-    checkoutBtn.disabled = true;
+function openCheckoutModal() {
+    checkoutModal.classList.add('active');
+}
+
+function closeCheckoutModal() {
+    checkoutModal.classList.remove('active');
+}
+
+checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) return alert('El carrito está vacío');
+    closeCart(); // Close sidebar
+    openCheckoutModal(); // Open form
+});
+
+// Handle Checkout Form Submit
+const checkoutForm = document.getElementById('checkout-form');
+checkoutForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const submitBtn = checkoutForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerText;
+    submitBtn.innerText = 'Procesando...';
+    submitBtn.disabled = true;
+
+    // Collect Data
+    const shippingInfo = {
+        calle: document.getElementById('calle').value,
+        altura: document.getElementById('altura').value,
+        piso: document.getElementById('piso').value,
+        entreCalles: document.getElementById('entre-calles').value,
+        barrio: document.getElementById('barrio').value,
+        telefono: document.getElementById('telefono').value,
+        observaciones: document.getElementById('observaciones').value
+    };
 
     try {
-        const response = await fetch(`${API_URL}/payment/create-preference`, {
+        // Prepare Order Data
+        const orderData = {
+            items: cart,
+            shipping: shippingInfo
+        };
+
+        // Call Backend to Create Order and Preference
+        const response = await fetch(`${API_URL}/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ items: cart })
+            body: JSON.stringify(orderData)
         });
 
-        if (!response.ok) throw new Error('Error creating preference');
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Error al procesar el pedido');
+        }
 
         const data = await response.json();
 
-        // Redirect to Mercado Pago Sandbox
+        // Redirect to Mercado Pago
         if (data.init_point) {
             window.location.href = data.init_point;
         } else {
-            alert('Error al iniciar el pago. Intenta nuevamente.');
+            throw new Error('No se recibió el link de pago');
         }
 
     } catch (error) {
         console.error('Checkout error:', error);
-        // Mostrar el mensaje real del error para facilitar depuración
-    } finally {
-        checkoutBtn.innerText = 'Finalizar Compra';
-        checkoutBtn.disabled = false;
+        alert(`Error: ${error.message}`);
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
     }
 });
 
