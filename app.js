@@ -401,6 +401,35 @@ if (checkoutBtn) {
 
 // Handle Checkout Form Submit
 const checkoutForm = document.getElementById('checkout-form');
+const calleInput = document.getElementById('calle');
+const alturaInput = document.getElementById('altura');
+const barrioInput = document.getElementById('barrio');
+
+// Auto-fill Barrio Logic (Mocking "City Map" / USIG behavior)
+function checkAddress() {
+    const calle = calleInput.value.trim();
+    const altura = alturaInput.value.trim();
+
+    if (calle.length > 3 && altura.length > 0) {
+        barrioInput.value = "Buscando...";
+        barrioInput.style.color = "#999";
+
+        // Simulate API delay
+        setTimeout(() => {
+            // Heuristic or Mock response
+            // In a real app, fetch from https://ws.usig.buenosaires.gob.ar/geocoding/v2/geocoding/?text=${calle} ${altura}
+            barrioInput.value = "Caballito (Detectado)";
+            barrioInput.style.color = "#333";
+            barrioInput.style.fontWeight = "bold";
+        }, 1500);
+    } else {
+        barrioInput.value = "";
+    }
+}
+
+calleInput.addEventListener('blur', checkAddress);
+alturaInput.addEventListener('blur', checkAddress);
+
 checkoutForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -413,11 +442,11 @@ checkoutForm.addEventListener('submit', async (e) => {
     const shippingInfo = {
         calle: document.getElementById('calle').value,
         altura: document.getElementById('altura').value,
-        piso: document.getElementById('piso').value,
-        entreCalles: document.getElementById('entre-calles').value,
+        piso: document.getElementById('piso').value || '',
+        entreCalles: document.getElementById('entre-calles').value || '',
         barrio: document.getElementById('barrio').value,
         telefono: document.getElementById('telefono').value,
-        observaciones: document.getElementById('observaciones').value
+        observaciones: document.getElementById('observaciones').value || ''
     };
 
     try {
@@ -445,6 +474,7 @@ checkoutForm.addEventListener('submit', async (e) => {
 
         // Redirect to Mercado Pago
         if (data.init_point) {
+            // Success: Now we can clear the form and cart if needed, but usually redirect happens fast
             window.location.href = data.init_point;
         } else {
             throw new Error('No se recibió el link de pago');
