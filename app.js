@@ -381,22 +381,37 @@ function filterAndScroll(term) {
     // Normalize term
     const searchTerm = term.toLowerCase();
 
-    // Filter products looking in Category or Subcategory
+    // Mapping for specific "Obra Gruesa" terms if category doesn't exist yet
+    const keywords = {
+        'obra gruesa': ['ladrillo', 'cemento', 'arena', 'cal', 'vigueta', 'cascote'],
+        'hierros': ['hierro', 'malla', 'viga', 'columna', 'estribo'],
+        'durlock': ['durlock', 'perfil', 'masilla', 'placa', 'yeso', 'montante', 'solera']
+    };
+
+    const searchTerms = keywords[searchTerm] || [searchTerm];
+
+    // Filter products looking in Category, Subcategory, Name, or Description
     const filtered = products.filter(p => {
         const cat = p.category ? p.category.toLowerCase() : '';
         const sub = p.subcategory ? p.subcategory.toLowerCase() : '';
-        return cat.includes(searchTerm) || sub.includes(searchTerm);
+        const name = p.name ? p.name.toLowerCase() : '';
+        const desc = p.description ? p.description.toLowerCase() : '';
+
+        // Check against all related keywords for this term
+        return searchTerms.some(k =>
+            cat.includes(k) ||
+            sub.includes(k) ||
+            name.includes(k) ||
+            desc.includes(k)
+        );
     });
 
     if (filtered.length > 0) {
         renderProducts(filtered);
     } else {
-        // Fallback if no specific match, show all or handle empty
-        // For now, let's show all and maybe alert? Or just show empty.
-        // Better: Try to match loosely
         console.warn(`No products found for filter: ${term}`);
         renderProducts([]);
-        document.getElementById('product-list').innerHTML = `<p style="text-align:center; grid-column:1/-1;">No hay productos disponibles en la categoría "${term}" por el momento.</p>`;
+        document.getElementById('product-list').innerHTML = `<p style="text-align:center; grid-column:1/-1; padding: 20px;">No se encontraron productos para "${term}". <br> <small>Intenta buscando por nombre o revisa la conexión.</small></p>`;
     }
 
     scrollToSection('#product-list');
