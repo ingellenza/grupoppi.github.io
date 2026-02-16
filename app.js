@@ -145,22 +145,32 @@ function renderProducts(productsToRender) {
         // Format price to currency
         const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price);
 
+        // Stock Logic
+        const isOutOfStock = product.stock === 0;
+        const stockBadge = isOutOfStock ? '<div class="badge-no-stock">SIN STOCK</div>' : '';
+        const buttonHtml = isOutOfStock
+            ? `<button class="add-to-cart" disabled style="background-color: #ccc; cursor: not-allowed; transform: none;">Sin Stock</button>`
+            : `<button class="add-to-cart" data-id="${product._id}">
+                <i class="fas fa-shopping-cart"></i> Agregar al Carrito
+               </button>`;
+
         productCard.innerHTML = `
-            <img src="${product.image ? (product.image.startsWith('http') ? product.image : API_URL.replace('/api', '') + product.image) : 'https://via.placeholder.com/300x200?text=Sin+Imagen'}" alt="${product.name}" class="product-image">
+            <div style="position: relative;">
+                ${stockBadge}
+                <img src="${product.image ? (product.image.startsWith('http') ? product.image : API_URL.replace('/api', '') + product.image) : 'https://via.placeholder.com/300x200?text=Sin+Imagen'}" alt="${product.name}" class="product-image" style="${isOutOfStock ? 'opacity: 0.6;' : ''}">
+            </div>
             <div class="product-info">
                 <h4 class="product-title">${product.name}</h4>
                 <p class="product-description">${product.description || ''}</p>
                 <p class="product-price">${formattedPrice}</p>
-                <button class="add-to-cart" data-id="${product._id}">
-                    <i class="fas fa-shopping-cart"></i> Agregar al Carrito
-                </button>
+                ${buttonHtml}
             </div>
         `;
         productList.appendChild(productCard);
     });
 
-    // Add Event Listeners to Buttons
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
+    // Add Event Listeners to Buttons (only active ones)
+    document.querySelectorAll('.add-to-cart:not([disabled])').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const id = e.target.closest('button').dataset.id;
             addToCart(id);
