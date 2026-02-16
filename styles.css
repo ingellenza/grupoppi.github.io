@@ -704,10 +704,18 @@ main {
 }
 
 .cart-item img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
+    width: 80px;
+    /* Increased size */
+    height: 80px;
+    /* Increased size */
+    object-fit: contain;
+    /* Show full image, don't crop */
     margin-right: 15px;
+    border: 1px solid #eee;
+    /* Light border to define the area */
+    border-radius: 4px;
+    padding: 2px;
+    /* Small padding inside border */
 }
 
 .cart-item-info {
