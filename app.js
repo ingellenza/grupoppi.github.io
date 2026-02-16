@@ -546,6 +546,54 @@ function filterAndScroll(term) {
     scrollToSection('#product-list');
 }
 
+// Search Logic (Real-time 3 chars)
+const searchInput = document.getElementById('search-input');
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase().trim();
+
+        // Reset if empty
+        if (term.length === 0) {
+            renderProducts(products); // Show all
+            return;
+        }
+
+        // Trigger only on 3+ chars
+        if (term.length >= 3) {
+            // Priority: "Starts With" or Exact Match
+            const filtered = products.filter(p => {
+                const name = p.name.toLowerCase();
+                return name.startsWith(term) || name.includes(term);
+            });
+
+            // Special Case: "que sea el unico producto si es igual"
+            // If we have an EXACT match by name, show ONLY that one.
+            const exactMatch = filtered.find(p => p.name.toLowerCase() === term);
+
+            if (exactMatch) {
+                renderProducts([exactMatch]);
+            } else {
+                // Sort to put "Starts With" first
+                filtered.sort((a, b) => {
+                    const nameA = a.name.toLowerCase();
+                    const nameB = b.name.toLowerCase();
+                    const startsA = nameA.startsWith(term);
+                    const startsB = nameB.startsWith(term);
+
+                    if (startsA && !startsB) return -1;
+                    if (!startsA && startsB) return 1;
+                    return 0;
+                });
+
+                renderProducts(filtered);
+            }
+
+            // Optional: Scroll to results if user is typing? 
+            // Maybe annoying while typing, so we skip auto-scroll here unless they hit enter.
+        }
+    });
+}
+
 // Contact Modal Logic
 const contactModal = document.getElementById('contact-modal');
 

@@ -750,8 +750,16 @@ main {
 
 .product-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    /* Stronger shadow */
     border-color: var(--primary-color);
+    cursor: pointer;
+}
+
+/* Make Add to Cart button Blue on Card Hover */
+.product-card:hover .add-to-cart {
+    background-color: var(--primary-color);
+    transform: scale(1.05);
 }
 
 .product-image {
