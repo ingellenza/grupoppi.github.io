@@ -315,8 +315,26 @@ function updateCartUI() {
             cartItem.classList.add('cart-item');
             const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(item.price);
 
+            // Robust Image Logic: Handle relative paths and fallbacks
+            // User requested "miniatura sin texto" (thumbnail without text)
+            let imageUrl = 'https://via.placeholder.com/80/cccccc/ffffff?text=+'; // Blank gray box with specific size
+
+            if (item.image) {
+                if (item.image.startsWith('http')) {
+                    imageUrl = item.image;
+                } else {
+                    // It's a relative path, prepend API URL base if known, otherwise use it as relative to site
+                    // Assuming API_URL is like .../api, we want the root .../
+                    const baseUrl = API_URL.replace('/api', '');
+                    imageUrl = baseUrl + item.image;
+                }
+            }
+
+            // Error handler for broken images to revert to the blank box
+            const imgTag = `<img src="${imageUrl}" alt="${item.name}" onerror="this.onerror=null;this.src='https://via.placeholder.com/80/cccccc/ffffff?text=+';">`;
+
             cartItem.innerHTML = `
-                <img src="${item.image}" alt="${item.name}">
+                ${imgTag}
                 <div class="cart-item-info">
                     <h5 class="cart-item-title">${item.name}</h5>
                     <p class="cart-item-price">${formattedPrice} x ${item.quantity}</p>
@@ -401,9 +419,8 @@ if (checkoutBtn) {
 
 // Handle Checkout Form Submit
 const checkoutForm = document.getElementById('checkout-form');
-const calleInput = document.getElementById('calle');
-const alturaInput = document.getElementById('altura');
-const barrioInput = document.getElementById('barrio');
+// Barrio Input removed from HTML, so we don't need to select it
+// const calleInput ... (keeping selection if needed for other logic, but auto-fill is gone)
 
 // Auto-fill Barrio Logic (Mocking "City Map" / USIG behavior)
 function checkAddress() {
@@ -444,7 +461,7 @@ checkoutForm.addEventListener('submit', async (e) => {
         altura: document.getElementById('altura').value,
         piso: document.getElementById('piso').value || '',
         entreCalles: document.getElementById('entre-calles').value || '',
-        barrio: document.getElementById('barrio').value,
+        barrio: '', // Removed field
         telefono: document.getElementById('telefono').value,
         observaciones: document.getElementById('observaciones').value || ''
     };
