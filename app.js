@@ -88,35 +88,39 @@ async function fetchProducts() {
         const mockProducts = [
             {
                 _id: '1',
-                name: 'Yerba Mate Taragüi 500g',
-                price: 4500,
-                stock: 10,
-                image: 'https://http2.mlstatic.com/D_NQ_NP_906950-MLA46054045501_052021-O.webp',
-                description: 'Clásica yerba mate argentina con palo.'
+                name: 'Ladrillo Hueco 12x18x33',
+                price: 1200,
+                stock: 1000,
+                category: 'Obra Gruesa',
+                image: 'https://http2.mlstatic.com/D_NQ_NP_796532-MLA45711365440_042021-O.webp',
+                description: 'Ladrillo cerámico hueco para muros portantes y cerramientos.'
             },
             {
                 _id: '2',
-                name: 'Dulce de Leche Havanna 450g',
-                price: 6200,
-                stock: 5,
-                image: 'https://http2.mlstatic.com/D_NQ_NP_899201-MLA45750836932_042021-O.webp',
-                description: 'El auténtico dulce de leche de Mar del Plata.'
+                name: 'Cemento Loma Negra 50kg',
+                price: 9500,
+                stock: 50,
+                category: 'Obra Gruesa',
+                image: 'https://http2.mlstatic.com/D_NQ_NP_916327-MLA44546376362_012021-O.webp',
+                description: 'Cemento Portland fillerizado, ideal para uso general en la construcción.'
             },
             {
                 _id: '3',
-                name: 'Alfajor Jorgito Chocolate (Caja x6)',
-                price: 3500,
+                name: 'Hierro del 8 (Barra 12m)',
+                price: 12500,
                 stock: 0, // Mock "Sin Stock"
-                image: 'https://acdn.mitiendanube.com/stores/001/151/835/products/jorgito-negro-11-2c97444101e45758b916171960256860-640-0.jpg',
-                description: 'Alfajor relleno con dulce de leche bañado en chocolate semiamargo.'
+                category: 'Hierros',
+                image: 'https://http2.mlstatic.com/D_NQ_NP_606622-MLA44597332766_012021-O.webp',
+                description: 'Acero aletado para hormigón armado. Barra de 12 metros.'
             },
             {
                 _id: '4',
-                name: 'Galletitas Chocolinas 170g',
-                price: 1800,
+                name: 'Placa Durlock Estándar 12.5mm',
+                price: 15800,
                 stock: 20,
-                image: 'https://jumboargentina.vtexassets.com/arquivos/ids/698288/Galletitas-Chocolinas-Original-170-Gr-1-840656.jpg?v=637851610480300000',
-                description: 'Las galletitas de chocolate más famosas para tu chocotorta.'
+                category: 'Durlock',
+                image: 'https://http2.mlstatic.com/D_NQ_NP_736279-MLA44566373804_012021-O.webp',
+                description: 'Placa de yeso estándar para paredes y cielorrasos interiores.'
             }
         ];
 
