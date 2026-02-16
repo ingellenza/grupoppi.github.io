@@ -444,8 +444,8 @@ function checkAddress() {
     }
 }
 
-calleInput.addEventListener('blur', checkAddress);
-alturaInput.addEventListener('blur', checkAddress);
+// calleInput.addEventListener('blur', checkAddress);
+// alturaInput.addEventListener('blur', checkAddress);
 
 checkoutForm.addEventListener('submit', async (e) => {
     e.preventDefault();
