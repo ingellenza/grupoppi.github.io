@@ -390,6 +390,18 @@ function openCheckoutModal() {
         alert('Error: No se encuentra la ventana de pago. Por favor recarga la página.');
         return;
     }
+
+    // Reset Form and Button State on Open
+    const form = document.getElementById('checkout-form');
+    if (form) {
+        form.reset();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.innerText = 'Confirmar Compra'; // Or whatever original text was
+            submitBtn.disabled = false;
+        }
+    }
+
     checkoutModal.classList.add('active');
     console.log('Checkout modal opened');
 }
