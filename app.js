@@ -90,6 +90,7 @@ async function fetchProducts() {
                 _id: '1',
                 name: 'Yerba Mate Taragüi 500g',
                 price: 4500,
+                stock: 10,
                 image: 'https://http2.mlstatic.com/D_NQ_NP_906950-MLA46054045501_052021-O.webp',
                 description: 'Clásica yerba mate argentina con palo.'
             },
@@ -97,6 +98,7 @@ async function fetchProducts() {
                 _id: '2',
                 name: 'Dulce de Leche Havanna 450g',
                 price: 6200,
+                stock: 5,
                 image: 'https://http2.mlstatic.com/D_NQ_NP_899201-MLA45750836932_042021-O.webp',
                 description: 'El auténtico dulce de leche de Mar del Plata.'
             },
@@ -104,6 +106,7 @@ async function fetchProducts() {
                 _id: '3',
                 name: 'Alfajor Jorgito Chocolate (Caja x6)',
                 price: 3500,
+                stock: 0, // Mock "Sin Stock"
                 image: 'https://acdn.mitiendanube.com/stores/001/151/835/products/jorgito-negro-11-2c97444101e45758b916171960256860-640-0.jpg',
                 description: 'Alfajor relleno con dulce de leche bañado en chocolate semiamargo.'
             },
@@ -111,6 +114,7 @@ async function fetchProducts() {
                 _id: '4',
                 name: 'Galletitas Chocolinas 170g',
                 price: 1800,
+                stock: 20,
                 image: 'https://jumboargentina.vtexassets.com/arquivos/ids/698288/Galletitas-Chocolinas-Original-170-Gr-1-840656.jpg?v=637851610480300000',
                 description: 'Las galletitas de chocolate más famosas para tu chocotorta.'
             }
@@ -145,8 +149,11 @@ function renderProducts(productsToRender) {
         // Format price to currency
         const formattedPrice = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price);
 
-        // Stock Logic
-        const isOutOfStock = product.stock === 0;
+        // Stock Logic (Robust check)
+        // Check if stock exists and exactly 0 (handling numbers and numeric strings)
+        const stockValue = product.stock !== undefined ? Number(product.stock) : 10; // Default to 10 if undefined
+        const isOutOfStock = stockValue === 0;
+
         const stockBadge = isOutOfStock ? '<div class="badge-no-stock">SIN STOCK</div>' : '';
         const buttonHtml = isOutOfStock
             ? `<button class="add-to-cart" disabled style="background-color: #ccc; cursor: not-allowed; transform: none;">Sin Stock</button>`
