@@ -544,6 +544,19 @@ main {
     background-color: #002060;
 }
 
+/* Stock Badge */
+.badge-no-stock {
+    background-color: #dc3545;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
 .section-header {
     text-align: center;
     margin-bottom: 40px;
