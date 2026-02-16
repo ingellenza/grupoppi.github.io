@@ -183,11 +183,11 @@
             <form id="checkout-form">
                 <div class="form-row" style="display: flex; gap: 10px;">
                     <div class="form-group" style="flex: 2;">
-                        <label for="calle">Calle *</label>
+                        <label for="calle" style="color: var(--primary-color);">Calle *</label>
                         <input type="text" id="calle" required placeholder="">
                     </div>
                     <div class="form-group" style="flex: 1;">
-                        <label for="altura">Altura *</label>
+                        <label for="altura" style="color: var(--primary-color);">Altura *</label>
                         <input type="number" id="altura" required placeholder="">
                     </div>
                 </div>
@@ -198,20 +198,14 @@
                         <input type="text" id="piso" placeholder="">
                     </div>
                     <div class="form-group" style="flex: 2;">
-                        <label for="barrio">Barrio (Automático)</label>
-                        <input type="text" id="barrio" placeholder="" readonly style="background-color: #f0f0f0;">
-                    </div>
-                </div>
-
-                <div class="form-row" style="display: flex; gap: 10px;">
-                    <div class="form-group" style="flex: 1;">
                         <label for="entre-calles">Entre Calles</label>
                         <input type="text" id="entre-calles" placeholder="">
                     </div>
-                    <div class="form-group" style="flex: 1;">
-                        <label for="telefono">Teléfono *</label>
-                        <input type="tel" id="telefono" required placeholder="Ej: 11 1234 5678">
-                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono" style="color: var(--primary-color);">Teléfono de Contacto *</label>
+                    <input type="tel" id="telefono" required placeholder="Ej: 11 1234 5678">
                 </div>
 
                 <div class="form-group" style="margin-bottom: 10px;">
