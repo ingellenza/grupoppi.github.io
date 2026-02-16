@@ -81,7 +81,8 @@ h4 {
     background-color: var(--secondary-color);
     color: var(--white);
     text-align: center;
-    padding: 8px 0;
+    padding: 5px 0;
+    /* Reduced padding */
     font-size: 0.9rem;
     font-weight: 500;
 }
@@ -89,7 +90,8 @@ h4 {
 /* Header */
 .main-header {
     background-color: var(--white);
-    padding: 20px 0;
+    padding: 10px 0;
+    /* Reduced padding */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     position: sticky;
     top: 0;
@@ -104,7 +106,8 @@ h4 {
 
 .logo h1 {
     color: var(--primary-color);
-    font-size: 28px;
+    font-size: 24px;
+    /* Slightly smaller logo */
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -119,7 +122,8 @@ h4 {
 
 .search-bar input {
     width: 100%;
-    padding: 10px 15px;
+    padding: 8px 15px;
+    /* Compact input */
     border: 1px solid var(--border-color);
     border-radius: 20px;
     outline: none;
@@ -161,7 +165,8 @@ h4 {
 
 .main-nav a {
     display: block;
-    padding: 15px 20px;
+    padding: 10px 20px;
+    /* Reduced padding */
     color: #555;
     font-weight: 500;
     text-transform: uppercase;
@@ -455,7 +460,8 @@ h4 {
 
 /* Product Section */
 main {
-    padding: 40px 20px;
+    padding: 20px;
+    /* Reduced top padding */
 }
 
 .section-header {
