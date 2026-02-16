@@ -359,21 +359,41 @@ overlay.addEventListener('click', closeCart);
 
 // Checkout Logic (Mercado Pago Integration)
 // Checkout Logic (Open Modal)
+// Checkout Logic (Open Modal)
 const checkoutModal = document.getElementById('checkout-modal');
 
 function openCheckoutModal() {
+    if (!checkoutModal) {
+        console.error('Checkout modal not found!');
+        alert('Error: No se encuentra la ventana de pago. Por favor recarga la página.');
+        return;
+    }
     checkoutModal.classList.add('active');
+    console.log('Checkout modal opened');
 }
 
 function closeCheckoutModal() {
-    checkoutModal.classList.remove('active');
+    if (checkoutModal) checkoutModal.classList.remove('active');
 }
 
-checkoutBtn.addEventListener('click', () => {
-    if (cart.length === 0) return alert('El carrito está vacío');
-    closeCart(); // Close sidebar
-    openCheckoutModal(); // Open form
-});
+if (checkoutBtn) {
+    // Remove previous listeners (not really possible without function reference, but creating a new unique listener helps)
+    // We assume the old one is gone because we replaced the code block
+    checkoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('Checkout button clicked');
+
+        if (cart.length === 0) {
+            alert('El carrito está vacío');
+            return;
+        }
+
+        closeCart(); // Close sidebar
+        openCheckoutModal(); // Open form
+    });
+} else {
+    console.error('Checkout button not found in DOM');
+}
 
 // Handle Checkout Form Submit
 const checkoutForm = document.getElementById('checkout-form');
