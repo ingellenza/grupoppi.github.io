@@ -548,13 +548,16 @@ main {
 .badge-no-stock {
     background-color: #dc3545;
     color: white;
-    padding: 4px 8px;
+    padding: 5px 10px;
     border-radius: 4px;
     font-size: 0.8rem;
     font-weight: bold;
     text-transform: uppercase;
-    display: inline-block;
-    margin-bottom: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .section-header {
