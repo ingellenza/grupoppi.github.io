@@ -370,9 +370,52 @@ checkoutBtn.addEventListener('click', async () => {
     } catch (error) {
         console.error('Checkout error:', error);
         // Mostrar el mensaje real del error para facilitar depuración
-        alert(`Error: ${error.message || 'Hubo un error al procesar el pago.'}`);
     } finally {
         checkoutBtn.innerText = 'Finalizar Compra';
         checkoutBtn.disabled = false;
+    }
+});
+
+// Carousel Filter Logic
+function filterAndScroll(term) {
+    // Normalize term
+    const searchTerm = term.toLowerCase();
+
+    // Filter products looking in Category or Subcategory
+    const filtered = products.filter(p => {
+        const cat = p.category ? p.category.toLowerCase() : '';
+        const sub = p.subcategory ? p.subcategory.toLowerCase() : '';
+        return cat.includes(searchTerm) || sub.includes(searchTerm);
+    });
+
+    if (filtered.length > 0) {
+        renderProducts(filtered);
+    } else {
+        // Fallback if no specific match, show all or handle empty
+        // For now, let's show all and maybe alert? Or just show empty.
+        // Better: Try to match loosely
+        console.warn(`No products found for filter: ${term}`);
+        renderProducts([]);
+        document.getElementById('product-list').innerHTML = `<p style="text-align:center; grid-column:1/-1;">No hay productos disponibles en la categoría "${term}" por el momento.</p>`;
+    }
+
+    scrollToSection('#product-list');
+}
+
+// Contact Modal Logic
+const contactModal = document.getElementById('contact-modal');
+
+function openContactModal() {
+    contactModal.classList.add('active');
+}
+
+function closeContactModal() {
+    contactModal.classList.remove('active');
+}
+
+// Close modal when clicking outside content
+window.addEventListener('click', (e) => {
+    if (e.target === contactModal) {
+        closeContactModal();
     }
 });
